@@ -79,17 +79,19 @@ pipeline {
     }
 
     stage('Terraform Init') {
-      steps {
+    steps {
         timeout(time: 5, unit: 'MINUTES') {
-          sh '''
+        sh '''
             set -e
-            terraform init -reconfigure \
-              -backend-config="bucket=terraform-state-jenkins5533" \
-              -backend-config="region=us-east-1"
-          '''
+            rm -rf .terraform .terraform.lock.hcl
+            terraform init -input=false -no-color -reconfigure \
+            -backend-config="bucket=terraform-state-jenkins5533" \
+            -backend-config="region=us-east-1"
+        '''
         }
-      }
     }
+    }
+
 
     stage('Terraform Validate') {
       steps {
