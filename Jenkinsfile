@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    AWS_CREDENTIALS_ID = 'aws-creds'  // Jenkins credential ID
+    AWS_CREDENTIALS_ID = 'aws-cred'  // Jenkins credential ID
     TF_BACKEND_BUCKET  = 'terraform-state-jenkins5533'
     TF_BACKEND_REGION  = 'us-east-1'
   }
