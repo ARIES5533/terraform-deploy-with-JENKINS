@@ -23,14 +23,15 @@ pipeline {
     }
 
     stage('Terraform Init') {
-      steps {
-        sh '''
-          terraform init \
-            -backend-config="bucket=${TF_BACKEND_BUCKET}" \
-            -backend-config="region=${TF_BACKEND_REGION}"
-        '''
-      }
+        steps {
+            sh '''
+            terraform init -reconfigure \
+            -backend-config="bucket=terraform-state-jenkins5533" \
+            -backend-config="region=us-east-1"
+            '''
+        }
     }
+
 
     stage('Terraform Validate') {
       steps {
