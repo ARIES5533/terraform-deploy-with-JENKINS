@@ -31,5 +31,5 @@ variable "key_name" {
 variable "ec2_name" {
   description = "EC2 instance name tag"
   type        = string
-  default     = "my-terraform-ec2"
+  default     = "my-terraform-ec2-jenkins"
 }
