@@ -79,6 +79,7 @@ pipeline {
     }
     stage('Snyk Security Scan') {
       steps {
+        withCredentials([string(credentialsId: 'snyk', variable: 'SNYK_TOKEN')]) {
         sh '''
           echo "🔍 Running Snyk IaC scan on Terraform directory..."
           snyk iac test jenkins-terraform --token=$SNYK_TOKEN || true
@@ -89,6 +90,7 @@ pipeline {
 
           echo "✅ Snyk scan completed."
         '''
+        }
       }
     }
 
