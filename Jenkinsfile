@@ -82,7 +82,7 @@ pipeline {
         withCredentials([string(credentialsId: 'snyk', variable: 'SNYK_TOKEN')]) {
         sh '''
           echo "🔍 Running Snyk IaC scan on Terraform directory..."
-          snyk iac test . --token=$SNYK_TOKEN || true
+          snyk iac test terraform-deploy-with-JENKINS --token=$SNYK_TOKEN --org=olumokomosesint || true
 
           # Optional: uncomment this if you have Docker image scanning later
           # echo "🐳 Running Snyk Container scan..."
