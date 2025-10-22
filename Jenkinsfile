@@ -82,7 +82,15 @@ pipeline {
         withCredentials([string(credentialsId: 'snyk', variable: 'SNYK_TOKEN')]) {
           sh '''
             # Option A: Auto-detect project type
-            snyk test --all-projects --token=$SNYK_TOKEN
+                          # IaC (Terraform)
+            snyk iac test --token=$SNYK_TOKEN
+
+              # SAST (for app code)
+            snyk code test --token=$SNYK_TOKEN
+
+              # Container image (if applicable)
+            snyk container test <image_name> --token=$SNYK_TOKEN
+
           '''
         }
       }
