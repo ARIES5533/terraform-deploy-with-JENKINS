@@ -77,6 +77,16 @@ pipeline {
         }
       }
     }
+    stage('Snyk Test') {
+      steps {
+        withCredentials([string(credentialsId: 'snyk', variable: 'SNYK_TOKEN')]) {
+          sh '''
+            # Option A: Auto-detect project type
+            snyk test --all-projects --token=$SNYK_TOKEN
+          '''
+        }
+      }
+    }
 
     stage('Terraform Init') {
     steps {
